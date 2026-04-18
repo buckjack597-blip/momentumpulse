@@ -26,8 +26,9 @@ export function scoreAssets(assets: Asset[]): ScoredAsset[] {
       Math.min(p1h * 4 + p24 * 0.8, 40) +
       Math.min(Math.max((volRatio - 0.5) * 25, 0), 40) +
       Math.min(volatility, 20), 100))
-    const momentum_label =
+    const momentum_label = (
       score >= 75 ? 'Extreme' : score >= 50 ? 'High' : score >= 25 ? 'Building' : 'Low'
+    ) as 'Low' | 'Building' | 'High' | 'Extreme'
     return { ...a, momentum_score: score, momentum_label }
   }).sort((a, b) => b.momentum_score - a.momentum_score)
 }
